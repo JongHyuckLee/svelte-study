@@ -1,5 +1,6 @@
 {
-  "name": "bel.com",
+  "name": "svelte.js",
+  "author": "JongHyuck Lee",
   "version": "0.0.2",
   "private": true,
   "scripts": {
