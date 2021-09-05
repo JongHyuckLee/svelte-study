@@ -1,11 +1,16 @@
 <script>
 	import Item from "./Item.svelte";
+	import LifeCycle from "./LifeCycle.svelte";
 
 	let name = 'Svelte';
 	let inputValue = '';
 	let list = ['item1', 'item2'];
 	function onClick() {
 		list = [...list, inputValue];
+	}
+	let show = true;
+	function onClickRemoveParent() {
+		show=false;
 	}
 </script>
 
@@ -18,6 +23,10 @@
 	{#each list as text}
 		<Item text={text}/>
 	{/each}
+	{#if show}
+	<LifeCycle/>
+	{/if}
+	<button on:click={onClickRemoveParent}>부모 노드 삭제</button>
 </main>
 
 <style>
