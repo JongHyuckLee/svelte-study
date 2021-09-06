@@ -1,22 +1,34 @@
 <script>
 	import Item from "./Item.svelte";
 	import LifeCycle from "./LifeCycle.svelte";
+	import FunctionPropItem from "./FunctionPropItem.svelte";
 
 	let name = 'Svelte';
 	let inputValue = '';
 	let list = ['item1', 'item2'];
+
 	function onClick() {
 		list = [...list, inputValue];
 	}
+
 	let show = true;
+
 	function onClickRemoveParent() {
-		show=false;
+		show = false;
+	}
+
+	function onAlert(text, e) {
+		alert(`parameter : ${text}, event target value : ${e.target.value}`);
+	}
+
+	function onAlert2(e) {
+		alert(`parameter : ${e.detail.text}, event target value : ${e.detail.value}`);
 	}
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<p>Visit the Svelte!!</p>
+	<p on:click={() => console.log("click Svelte")}>Visit the Svelte!!</p>
 	<input type="text" placeholder="입력" bind:value={inputValue}>
 	<button on:click={onClick}>입력</button>
 	<div>입력 값 : {inputValue}</div>
@@ -24,9 +36,10 @@
 		<Item text={text}/>
 	{/each}
 	{#if show}
-	<LifeCycle/>
+<!--	<LifeCycle/>-->
 	{/if}
-	<button on:click={onClickRemoveParent}>부모 노드 삭제</button>
+	<button on:click={onClickRemoveParent}>LifeCycle 컴포넌트 삭제</button>
+	<FunctionPropItem {onAlert} on:onAlert2={onAlert2}/>
 </main>
 
 <style>

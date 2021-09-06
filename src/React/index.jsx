@@ -1,14 +1,20 @@
 import React from 'react'
 import Item from "./Item";
+import FunctionPropItem from "./FunctionPropItem";
+import LifeCycle from "./LifeCycle";
 export default function Index() {
     const [name] = React.useState('React');
     const [inputValue, setInputValue] = React.useState("");
     const [list, setList] = React.useState(['item1', 'item2']);
+    const [show, setShow] = React.useState(true);
     const inputRef = React.useRef(null);
     const onClick = () => {
         const value = inputRef?.current?.value;
 
         setList(prevState => [...prevState, value]);
+    }
+    const onAlert = (text, e) => {
+        alert(`parameter : ${text}, event target value : ${e.target.value}`);
     }
 
     return (
@@ -21,6 +27,10 @@ export default function Index() {
             {
                 list?.length && list.map((item) => <Item text={item}/> )
             }
+            <FunctionPropItem onAlert={onAlert}/>
+            {/*{show && <LifeCycle/>}*/}
+            <button onClick={() => setShow(false)}>라이프 사이클 컴포넌트 삭제</button>
+
         </main>
     )
 
